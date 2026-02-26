@@ -17,42 +17,44 @@ contract Bank{
 
     function saveMoney() public payable {
         require(msg.value > 0,"value must be more than 0");
+
         address userAddr = msg.sender;
-        uint256 money = countAndMoney[userAddr];
-        if(money == 0){
+        // 如果是新用户，则加入userAddrs数组
+        if (countAndMoney[userAddr] == 0) {
             userAddrs.push(userAddr);
         }
+        
         countAndMoney[userAddr] += msg.value;
-
         updateTop3(userAddr);
-
     }
+    
     function updateTop3(address user) internal {
         uint256 money = countAndMoney[user];
-        // 第一名
+        // ---------- Step1: 如果已在榜单，先移除 ----------
+        for (uint i = 0; i < 3; i++) {
+            if (top3[i] == user) {
+                for (uint j = i; j < 2; j++) {
+                    top3[j] = top3[j + 1];
+                }
+                top3[2] = address(0);
+                break;
+            }
+        }
+
+        // ---------- Step2: 插入排序 ----------
         if (money > countAndMoney[top3[0]]) {
-            // 后移
             top3[2] = top3[1];
             top3[1] = top3[0];
             top3[0] = user;
 
-        }
-        // 第二名
-        else if (user != top3[0] &&
-            money > countAndMoney[top3[1]]) {
+        } else if (money > countAndMoney[top3[1]]) {
             top3[2] = top3[1];
             top3[1] = user;
-
-        }
-        // 第三名
-        else if (
-            user != top3[0] &&
-            user != top3[1] &&
-            money > countAndMoney[top3[2]]
-        ) {
+        } else if (money > countAndMoney[top3[2]]) {
             top3[2] = user;
         }
     }
+
 
     function getTop3() external view returns(address[3] memory){
         return top3;

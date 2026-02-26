@@ -6,7 +6,13 @@
 	"output": {
 		"abi": [
 			{
-				"inputs": [],
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "admin",
+						"type": "address"
+					}
+				],
 				"stateMutability": "nonpayable",
 				"type": "constructor"
 			},
@@ -116,7 +122,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"Bank.sol": "Bank"
+			"BigBank.sol": "BigBank"
 		},
 		"evmVersion": "istanbul",
 		"libraries": {},
@@ -136,6 +142,14 @@
 			"urls": [
 				"bzz-raw://cdd17671f4b27e38c677da41a89a33b295386b35d9c091ab7f4933d217b4542d",
 				"dweb:/ipfs/QmXVgUbgk2UApRdezdbtf5zrFT8ALT5prffeUSzA9krnU5"
+			]
+		},
+		"BigBank.sol": {
+			"keccak256": "0xecc005c447ca1f2d27d8043b93f0b5720bb81925fece5cfa22a3e01e3201ab91",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://d21aee83b6950c582b887fbf6fa3c84a9fe786af6391e2880d2cc8c5f9711c16",
+				"dweb:/ipfs/QmRh7NMfhp7mSfK1vJViY2JbdDW1FTs3K9oAhnqFwNaWmt"
 			]
 		}
 	},

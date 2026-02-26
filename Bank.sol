@@ -15,7 +15,7 @@ contract Bank{
         owner = msg.sender;
     }
 
-    function saveMoney() public payable {
+    function saveMoney() public payable virtual  {
         require(msg.value > 0,"value must be more than 0");
 
         address userAddr = msg.sender;
